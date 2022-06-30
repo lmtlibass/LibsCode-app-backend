@@ -7,6 +7,8 @@ use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\DemandeFController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\NoteController;
+use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +51,11 @@ Route::controller(EvenementController::class)->group( function(){
     Route::get('evenement', 'index');
     Route::post('/addEvenement', 'store');
     Route::put('/updateEvenement/{$id}', 'update');
+});
+
+Router::controller(NoteController::class)->group( function (){
+    Route::get('/note', 'index');
+    Route::post('/addNote', 'index');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function(){
