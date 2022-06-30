@@ -2,6 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentaireController;
+use App\Http\Controllers\CoursController;
+use App\Http\Controllers\DemandeFController;
+use App\Http\Controllers\EvenementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +22,45 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/login', 'login');
+    Route::post('/register', 'register');
+    Route::post('/logout', 'logout');
+    Route::post('/refresh', 'refresh');
+});
+
+Route::controller(CoursController::class)->group(function (){
+    Route::get('/cours', 'index');
+    Route::post('/addCours', 'store');
+    Route::delete('/deleteCours/{$id}', 'delete');  
+});
+
+Route::controller(CommentaireController::class)->group( function() {
+    Route::get('/commentaires', 'index');
+    Route::post('/addCommentaire', 'store');
+    Route::delete('/deleteCommentaire/{$id}', 'delete');
+});
+
+Route::controller(DemandeFController::class)->group( function(){
+    Route::post('/addemande', 'store');
+});
+
+Route::controller(EvenementController::class)->group( function(){
+    Route::get('evenement', 'index');
+    Route::post('/addEvenement', 'store');
+    Route::put('/updateEvenement/{$id}', 'update');
+});
 
 Route::middleware(['auth', 'role:admin'])->group(function(){
-
+    Route::get('/demandes', [DemandeFController::class, 'index']);
+    Route::delete('/deleteEvenement/{$id}', [EvenementController::class, 'update']);
+    
 });
 
 Route::middleware(['auth', 'role:createur'])->group(function(){
-
+    Route::get('/cours/{$id}', [CoursController::class, 'show']);
 });
 
 Route::middleware(['auth', 'role:apprenant'])->group(function(){
-
+    Route::get('/cours/{$id}', [CoursController::class, 'show']);
 });
