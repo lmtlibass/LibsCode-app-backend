@@ -33,14 +33,16 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(CoursController::class)->group(function (){
     Route::get('/cours', 'index');
-    Route::post('/addCours', 'store');
-    Route::delete('/deleteCours/{$id}', 'delete');  
+    Route::post('/addcours', 'store');
+    Route::delete('/deletecours/{id}', 'delete');  
+    Route::put('/updatecours/{id}', 'update');
 });
 
 Route::controller(CommentaireController::class)->group( function() {
     Route::get('/commentaires', 'index');
     Route::post('/addCommentaire', 'store');
     Route::delete('/deleteCommentaire/{$id}', 'delete');
+    
 });
 
 Route::controller(DemandeFController::class)->group( function(){
@@ -50,24 +52,24 @@ Route::controller(DemandeFController::class)->group( function(){
 Route::controller(EvenementController::class)->group( function(){
     Route::get('evenement', 'index');
     Route::post('/addEvenement', 'store');
-    Route::put('/updateEvenement/{$id}', 'update');
+    Route::put('/updateEvenement/{id}', 'update');
 });
 
-Router::controller(NoteController::class)->group( function (){
+Route::controller(NoteController::class)->group( function (){
     Route::get('/note', 'index');
     Route::post('/addNote', 'index');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/demandes', [DemandeFController::class, 'index']);
-    Route::delete('/deleteEvenement/{$id}', [EvenementController::class, 'update']);
+    Route::delete('/deleteEvenement/{id}', [EvenementController::class, 'update']);
     
 });
 
 Route::middleware(['auth', 'role:createur'])->group(function(){
-    Route::get('/cours/{$id}', [CoursController::class, 'show']);
+    Route::get('/cours/{id}', [CoursController::class, 'show']);
 });
 
 Route::middleware(['auth', 'role:apprenant'])->group(function(){
-    Route::get('/cours/{$id}', [CoursController::class, 'show']);
+    Route::get('/cours/{id}', [CoursController::class, 'show']);
 });

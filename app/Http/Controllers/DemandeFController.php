@@ -22,6 +22,12 @@ class DemandeFController extends Controller
         return response()->json($demande);
     }
 
-    //
+    //suppression d'une demande
+
+    public function delete($id){
+        $demande = DemandeF::find($id);
+        $demande->delete();
+        return response()->json('suppression réussi');
+    }
 
 }

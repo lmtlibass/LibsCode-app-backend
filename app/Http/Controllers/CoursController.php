@@ -32,10 +32,10 @@ class CoursController extends Controller
         return response()->json('Suppression réussi');
     }
 
-        // public function update(Request $request, $id){
-        //     $cours = Cours::find($id);
-        //     $cours->update($request->all());
-        //     return response()->json($cours);
-        // }
+        public function update(Request $request, $id){
+            $cours = Cours::find($id);
+            $cours->update($request->all());
+            return response()->json($cours);
+        }
 
 }
