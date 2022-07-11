@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class EvenementController extends Controller
 {
+    //evenement les plus recents
+    public function evenementR()
+    {
+        $evenement = Evenement::orderBy('created_at', 'desc')->limit(8)->get();
+        return response()->json($evenement);
+    }
     //liste des evenements
     public function index(){
         $evenement = Evenement::all();

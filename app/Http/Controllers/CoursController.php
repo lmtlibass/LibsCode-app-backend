@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CoursController extends Controller
 {
+    //cours les plus recents
+    public function coursR()
+    {
+        $cours = Cours::orderBy('created_at', 'desc')->limit(8)->get();
+        return response()->json($cours);
+    }
     //afficher les cours
     public function index(){
         $cours = Cours::all();

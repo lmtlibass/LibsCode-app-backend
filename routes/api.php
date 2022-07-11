@@ -32,7 +32,9 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(CoursController::class)->group(function (){
+    Route::get('/coursRe', 'coursR');
     Route::get('/cours', 'index');
+    Route::get('cours/{id}', 'show');
     Route::post('/addcours', 'store');
     Route::delete('/deletecours/{id}', 'delete');  
     Route::put('/updatecours/{id}', 'update');
@@ -41,7 +43,7 @@ Route::controller(CoursController::class)->group(function (){
 Route::controller(CommentaireController::class)->group( function() {
     Route::get('/commentaires', 'index');
     Route::post('/addCommentaire', 'store');
-    Route::delete('/deleteCommentaire/{$id}', 'delete');
+    Route::delete('/deleteCommentaire/{id}', 'delete');
     
 });
 
@@ -50,7 +52,8 @@ Route::controller(DemandeFController::class)->group( function(){
 });
 
 Route::controller(EvenementController::class)->group( function(){
-    Route::get('evenement', 'index');
+    Route::get('/evenementRe', 'evenementR');
+    Route::get('/evenement', 'index');
     Route::post('/addEvenement', 'store');
     Route::put('/updateEvenement/{id}', 'update');
 });
@@ -67,9 +70,9 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
 });
 
 Route::middleware(['auth', 'role:createur'])->group(function(){
-    Route::get('/cours/{id}', [CoursController::class, 'show']);
+    // Route::get('/cours/{id}', [CoursController::class, 'show']);
 });
 
 Route::middleware(['auth', 'role:apprenant'])->group(function(){
-    Route::get('/cours/{id}', [CoursController::class, 'show']);
+    // Route::get('/cours/{id}', [CoursController::class, 'show']);
 });
