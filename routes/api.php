@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\DemandeFController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\ListeInscritController;
 use App\Http\Controllers\NoteController;
 use Illuminate\Routing\Router;
 
@@ -38,6 +39,7 @@ Route::controller(CoursController::class)->group(function (){
     Route::post('/addcours', 'store');
     Route::delete('/deletecours/{id}', 'delete');  
     Route::put('/updatecours/{id}', 'update');
+    Route::get('/coursA', 'getCours');
 });
 
 Route::controller(CommentaireController::class)->group( function() {
@@ -55,8 +57,16 @@ Route::controller(EvenementController::class)->group( function(){
     Route::get('/evenementRe', 'evenementR');
     Route::get('/evenement', 'index');
     Route::post('/addEvenement', 'store');
+    Route::get('/evenement/{id}', 'show');
     Route::put('/updateEvenement/{id}', 'update');
 });
+
+Route::controller(ListeInscritController::class)->group(function(){
+    Route::get('/listeinscrit', 'index');
+    Route::post('/addlisteinscrit', 'store');
+    Route::delete('/deletelisteinscrit/{id}', 'delete');
+});
+
 
 Route::controller(NoteController::class)->group( function (){
     Route::get('/note', 'index');
@@ -66,6 +76,7 @@ Route::controller(NoteController::class)->group( function (){
 Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/demandes', [DemandeFController::class, 'index']);
     Route::delete('/deleteEvenement/{id}', [EvenementController::class, 'update']);
+    // Route::get('/coursA', [CoursController::class, 'getCours']);
     
 });
 

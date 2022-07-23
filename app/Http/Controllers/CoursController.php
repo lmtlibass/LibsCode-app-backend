@@ -13,7 +13,13 @@ class CoursController extends Controller
         $cours = Cours::orderBy('created_at', 'desc')->limit(8)->get();
         return response()->json($cours);
     }
-    //afficher les cours
+    //Afficher les cours qui n'ont pas encore été validés par l'admin
+    public function getCours()
+    {
+        $cours = Cours::where('statut', '=', 0)->get();
+        return response()->json($cours);
+    }
+    //afficher les cours validés par les admins
     public function index(){
         $cours = Cours::all();
         return response()->json($cours);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class EvenementController extends Controller
 {
+    
     //evenement les plus recents
     public function evenementR()
     {
@@ -28,7 +29,7 @@ class EvenementController extends Controller
 
     //afficher detail evenement
     public function show($id){
-        $evenement = Evenement::find();
+        $evenement = Evenement::find($id);
         return response()->json($evenement);
     }
 
