@@ -31,53 +31,58 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout');
     Route::post('/refresh', 'refresh');
 });
-
 Route::controller(CoursController::class)->group(function (){
     Route::get('/coursRe', 'coursR');
+    Route::get('/coursA', 'getCours');
     Route::get('/cours', 'index');
     Route::get('cours/{id}', 'show');
-    Route::post('/addcours', 'store');
-    Route::delete('/deletecours/{id}', 'delete');  
-    Route::put('/updatecours/{id}', 'update');
-    Route::get('/coursA', 'getCours');
+    Route::get('/coursModule/{moduleid}', 'getCourByModule');
+    Route::post('/cours', 'store');  
+    Route::delete('/cours/{id}', 'delete');  
+    Route::put('/cours/{id}', 'update');
+    Route::get('cour/{user}', 'getCourByUser');
 });
 
 Route::controller(CommentaireController::class)->group( function() {
     Route::get('/commentaires', 'index');
-    Route::post('/addCommentaire', 'store');
-    Route::delete('/deleteCommentaire/{id}', 'delete');
-    
+    Route::post('/commentaires', 'store');
+    Route::delete('/commentaire/{id}', 'delete');
 });
 
 Route::controller(DemandeFController::class)->group( function(){
-    Route::post('/addemande', 'store');
+    Route::get('/demandes', 'index');
+    Route::delete('/demandes/{id}', 'delete');
+    Route::get('/demandes/{id}', 'show');
+    Route::post('/addemandes', 'store');
 });
 
 Route::controller(EvenementController::class)->group( function(){
+    Route::get('/evenements', 'index'); //get all events and the liste
+    Route::post('/evenements', 'store');
+    Route::get('/evenements/{id}', 'show');
+    Route::put('/evenements/{id}', 'update');
+    Route::delete('/evenements/{id}', 'delete');
     Route::get('/evenementRe', 'evenementR');
-    Route::get('/evenement', 'index');
-    Route::post('/addEvenement', 'store');
-    Route::get('/evenement/{id}', 'show');
-    Route::put('/updateEvenement/{id}', 'update');
+    Route::get('/evenementA', 'getEvenement');
+    Route::get('evenement/{user}', 'getEventsByUser');
 });
 
 Route::controller(ListeInscritController::class)->group(function(){
-    Route::get('/listeinscrit', 'index');
-    Route::post('/addlisteinscrit', 'store');
-    Route::delete('/deletelisteinscrit/{id}', 'delete');
+    Route::get('/listeinscrits', 'index');
+    Route::post('/listeinscrits', 'store');
+    Route::delete('/listeinscrits/{id}', 'delete');
+    Route::get('/liste/{eventsid}', 'getListeByEvent');
 });
 
 
 Route::controller(NoteController::class)->group( function (){
-    Route::get('/note', 'index');
-    Route::post('/addNote', 'index');
+    Route::get('/notes', 'index');
+    Route::post('/notes', 'index');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function(){
-    Route::get('/demandes', [DemandeFController::class, 'index']);
-    Route::delete('/deleteEvenement/{id}', [EvenementController::class, 'update']);
-    // Route::get('/coursA', [CoursController::class, 'getCours']);
-    
+Route::controller(ModuleController::class)->group( function(){
+    Route::get('/modules', 'index');
+    Route::get('/module', 'show');
 });
 
 Route::middleware(['auth', 'role:createur'])->group(function(){
