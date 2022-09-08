@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('cours', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
+        Schema::table('demande_f_s', function (Blueprint $table) {
+            //
+            $table->string('telephone');
         });
     }
 
@@ -25,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('cours', function (Blueprint $table) {
+        Schema::table('demande_f_s', function (Blueprint $table) {
             //
         });
     }

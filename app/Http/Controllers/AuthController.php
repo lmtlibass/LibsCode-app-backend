@@ -34,11 +34,11 @@ class AuthController extends Controller
 
         $user = Auth::user();
         return response()->json([
-                'status' => 'success',
-                'user' => $user,
+                'status'        => 'success',
+                'user'          => $user,
                 'authorisation' => [
                     'token' => $token,
-                    'type' => 'bearer',
+                    'type'  => 'bearer',
                 ]
             ]);
 
@@ -68,15 +68,25 @@ class AuthController extends Controller
         ]);
     }
 
+    // public function logout()
+    // {
+    //     Auth::logout();
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'message' => 'Successfully logged out',
+    //     ]);
+    // }
+     /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout()
     {
-        Auth::logout();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
-        ]);
-    }
+        auth()->logout();
 
+        return response()->json(['message' => 'Successfully logged out']);
+    }
     public function refresh()
     {
         return response()->json([

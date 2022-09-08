@@ -9,7 +9,8 @@ class ListeInscritController extends Controller
 {
     //recuperer la liste des instcrits
     public function index(){
-        $listeInscrit = ListeInscrit::all();
+        
+        $listeInscrit = ListeInscrit::paginate(2);    
         return response()->json($listeInscrit);
     }
 
@@ -24,6 +25,15 @@ class ListeInscritController extends Controller
         $listeInscrit = ListeInscrit::find($id);
         $listeInscrit->delete();
         return response()->json('suppression réussi');
+    }
+
+    
+    //obtenir une  liste à partir de l'événement
+
+    public function getListeByEvent($eventsid){
+        $liste = ListeInscrit::where('evenement_id', '=', $eventsid)->get();
+
+        return response()->json($liste);
     }
     
 }
