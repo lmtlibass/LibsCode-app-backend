@@ -29,9 +29,13 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/register', 'register');
     Route::post('/refresh', 'refresh');
+<<<<<<< HEAD
     Route::post('/logout', 'logout');
 });         
 
+=======
+});
+>>>>>>> de38c6a18483e437229b94d0d5d9af189e206c39
 Route::controller(CoursController::class)->group(function (){
     Route::get('/coursRe', 'coursR');
     Route::get('/coursA', 'getCours');
@@ -85,6 +89,7 @@ Route::controller(ModuleController::class)->group( function(){
     Route::get('/modules', 'index');
     Route::get('/module', 'show');
 });
+<<<<<<< HEAD
 
 
 
@@ -95,6 +100,8 @@ Route::controller(ModuleController::class)->group( function(){
 //     // // Route::get('/coursA', [CoursController::class, 'getCours']);
     
 // });
+=======
+>>>>>>> de38c6a18483e437229b94d0d5d9af189e206c39
 
 // Route::middleware(['auth', 'role:createur'])->group(function(){
 //     // Route::get('/cours/{id}', [CoursController::class, 'show']);
